@@ -17,7 +17,7 @@ the full model catalog and user-provided model workflow remain supported.
   licenses and notices.
 - Public demo: see the TOTO demo site linked from the release page.
 - Web demo: https://toto-toolkit.github.io/TOTO-demo/
-- Release: https://github.com/TOTO-Toolkit/TOTO-public/releases/tag/v0.2.0-public-beta.5
+- Release: https://github.com/TOTO-Toolkit/TOTO-public/releases/tag/v0.2.0-public-beta.6
 
 Developed at TeHealP, Pontificia Universidad Católica del Perú.
 Project lead: Fabian A. Nana. macOS port: Guillermo J. Armoa (not yet validated).
