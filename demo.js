@@ -1,6 +1,6 @@
 "use strict";
 
-const RELEASE_INSTALLER = "https://github.com/TOTO-Toolkit/TOTO-public/releases/download/v0.2.0-public-beta.7/TOTO-Setup.exe";
+const PRIVATE_INSTALLER_MAILTO = "mailto:fabian.nana@pucp.edu.pe?subject=Solicitud%20del%20instalador%20privado%20de%20TOTO&body=Hola%20Fabi%C3%A1n%2C%0A%0AQuiero%20solicitar%20el%20instalador%20privado%20de%20TOTO.";
 const MODEL_URL = "./models/movenet-multipose-lightning-1/model.json";
 const MODEL_NAME = "MoveNet MultiPose Lightning";
 // The detector resizes internally, but feeding it a full 1080p/4K video still
@@ -27,8 +27,8 @@ const copy = {
     nav_demo: "Demo real", nav_download: "Descargar", nav_releases: "Versiones", nav_code: "Distribución",
     live_model: "Modelo real", hero_title: "Prueba el tracking real antes de instalar.",
     hero_copy: "Selecciona un vídeo desde tu celular o computadora. MoveNet analiza las personas en tu navegador, dibuja sus puntos y te deja descargar los resultados. El vídeo no se sube a un servidor de TOTO.",
-    try_demo: "Probar con mi vídeo", download_windows: "Descargar instalador Windows", cloud_title: "Demo pública y distribución",
-    cloud_copy: "Esta página pública sirve la demo y el modelo desde la distribución de TOTO. El vídeo se procesa localmente en tu navegador.",
+    try_demo: "Probar con mi vídeo", request_installer: "Solicitar instalador privado por correo", cloud_title: "Demo pública; instalador privado",
+    cloud_copy: "La demo y el modelo se sirven públicamente. El instalador de escritorio no se publica: solicítalo por correo.",
     source_link: "Ver distribución", model_link: "Ver modelo", interactive_label: "PRUEBA INTERACTIVA",
     demo_title: "Sube un vídeo y ejecuta pose tracking", demo_copy: "Esta vez no hay una figura dibujada de mentira: el detector recibe los frames de tu vídeo y devuelve poses reales.",
     model_not_loaded: "Modelo no cargado", choose_video: "Elegir vídeo", load_model: "Cargar modelo", process_video: "Procesar vídeo",
@@ -41,8 +41,8 @@ const copy = {
     proof_one_title: "Modelo cargado", proof_one_copy: "MoveNet MultiPose Lightning se inicializa de verdad con TensorFlow.js y devuelve hasta seis personas.",
     proof_two_title: "Vídeo del usuario", proof_two_copy: "Puedes usar un archivo del teléfono o de la computadora; el procesamiento ocurre en la pestaña.",
     proof_three_title: "Salida bajo tu control", proof_three_copy: "Los resultados quedan en la caché temporal y solo se descargan si eliges Guardar CSV.",
-    distribution: "DISTRIBUCIÓN PÚBLICA", download_title: "Instala el flujo completo de escritorio",
-    download_copy: "El instalador web es un bootstrap separado del programa. Descarga los componentes desde la distribución de GitHub, verifica SHA-256, conserva las descargas reanudables y crea el acceso directo de TOTO.",
+    distribution: "ACCESO PRIVADO", download_title: "Solicita la versión privada",
+    download_copy: "La demo pública permite probar el modelo real. El instalador de escritorio no se sube ni se ofrece como descarga pública; pulsa el botón para solicitarlo por correo a fabian.nana@pucp.edu.pe.",
     poses: "poses", loading: "Cargando el modelo…", model_ready: "Modelo listo", processing: "Procesando vídeo…", stopped: "Procesamiento detenido",
     finished: "Procesamiento terminado", no_video: "Selecciona primero un vídeo", error: "No se pudo completar la operación",
   },
@@ -50,8 +50,8 @@ const copy = {
     nav_demo: "Live demo", nav_download: "Download", nav_releases: "Releases", nav_code: "Distribution",
     live_model: "Real model", hero_title: "Try real tracking before installing.",
     hero_copy: "Choose a video from your phone or computer. MoveNet detects people in your browser, draws their keypoints and lets you download the results. The video is not uploaded to a TOTO server.",
-    try_demo: "Try with my video", download_windows: "Download Windows installer", cloud_title: "Public demo and distribution",
-    cloud_copy: "This public page serves the demo and model from TOTO's distribution. Video processing stays local in your browser.",
+    try_demo: "Try with my video", request_installer: "Request private installer by email", cloud_title: "Public demo; private installer",
+    cloud_copy: "The demo and model are served publicly. The desktop installer is not published: request it by email.",
     source_link: "View distribution", model_link: "View model", interactive_label: "INTERACTIVE TEST",
     demo_title: "Upload a video and run pose tracking", demo_copy: "This is not a drawn figure: the detector receives frames from your video and returns real poses.",
     model_not_loaded: "Model not loaded", choose_video: "Choose video", load_model: "Load model", process_video: "Process video",
@@ -64,8 +64,8 @@ const copy = {
     proof_one_title: "Loaded model", proof_one_copy: "MoveNet MultiPose Lightning is initialized through TensorFlow.js and returns up to six people.",
     proof_two_title: "User video", proof_two_copy: "Use a file from your phone or computer; processing happens in this tab.",
     proof_three_title: "Output under your control", proof_three_copy: "Results stay in temporary tab memory and download only when you choose Save CSV.",
-    distribution: "PUBLIC DISTRIBUTION", download_title: "Install the complete desktop workflow",
-    download_copy: "The web installer is a bootstrap separate from the application. It downloads GitHub distribution components, verifies SHA-256, resumes interrupted downloads and creates the TOTO shortcut.",
+    distribution: "PRIVATE ACCESS", download_title: "Request the private version",
+    download_copy: "The public demo lets you try the real model. The desktop installer is not uploaded or offered as a public download; use the button to request it by email at fabian.nana@pucp.edu.pe.",
     poses: "poses", loading: "Loading model…", model_ready: "Model ready", processing: "Processing video…", stopped: "Processing stopped",
     finished: "Processing finished", no_video: "Choose a video first", error: "The operation could not be completed",
   },
@@ -98,8 +98,8 @@ function translate() {
   });
   document.documentElement.lang = locale;
   localStorage.setItem("toto-demo-language", locale);
-  $("download-hero").href = RELEASE_INSTALLER;
-  $("download-main").href = RELEASE_INSTALLER;
+  $("request-installer-hero").href = PRIVATE_INSTALLER_MAILTO;
+  $("request-installer-main").href = PRIVATE_INSTALLER_MAILTO;
 }
 
 function setStatus(message, kind = "") {

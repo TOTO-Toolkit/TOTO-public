@@ -39,13 +39,13 @@
           <p class="hero-copy" data-i18n="hero_copy">Selecciona un vídeo desde tu celular o computadora. MoveNet analiza las personas en tu navegador, dibuja sus puntos y te deja descargar los resultados. El vídeo no se sube a un servidor de TOTO.</p>
           <div class="hero-actions">
             <a class="button primary" href="#demo" data-i18n="try_demo">Probar con mi vídeo</a>
-            <a class="button secondary" id="download-hero" href="https://github.com/TOTO-Toolkit/TOTO-public/releases/download/v0.2.0-public-beta.7/TOTO-Setup.exe" data-i18n="download_windows">Descargar instalador Windows</a>
+            <a class="button secondary" id="request-installer-hero" href="mailto:fabian.nana@pucp.edu.pe?subject=Solicitud%20del%20instalador%20privado%20de%20TOTO" data-i18n="request_installer">Solicitar instalador privado por correo</a>
           </div>
         </div>
         <aside class="trust-card">
           <div class="trust-icon">◎</div>
-          <strong data-i18n="cloud_title">Código y distribución en GitHub</strong>
-          <span data-i18n="cloud_copy">La demo, el instalador y la trazabilidad del proyecto viven en GitHub. El modelo se carga desde la nube al pulsar “Cargar modelo”.</span>
+          <strong data-i18n="cloud_title">Demo pública; instalador privado</strong>
+          <span data-i18n="cloud_copy">La demo y el modelo se sirven públicamente. El instalador de escritorio no se publica: solicítalo por correo.</span>
           <div class="trust-links">
             <a href="https://github.com/TOTO-Toolkit/TOTO-public" data-i18n="source_link">Ver distribución</a>
             <a href="https://tfhub.dev/google/tfjs-model/movenet/multipose/lightning/1" data-i18n="model_link">Ver modelo</a>
@@ -127,11 +127,11 @@
 
       <section id="download" class="download-section">
         <div>
-          <p class="eyebrow" data-i18n="distribution">DISTRIBUCIÓN PÚBLICA</p>
-          <h2 data-i18n="download_title">Instala el flujo completo de escritorio</h2>
-          <p data-i18n="download_copy">El instalador web es un bootstrap separado del programa. Descarga los componentes desde la distribución de GitHub, verifica SHA-256, conserva las descargas reanudables y crea el acceso directo de TOTO.</p>
+          <p class="eyebrow" data-i18n="distribution">ACCESO PRIVADO</p>
+          <h2 data-i18n="download_title">Solicita la versión privada</h2>
+          <p data-i18n="download_copy">La demo pública permite probar el modelo real. El instalador de escritorio no se sube ni se ofrece como descarga pública; pulsa el botón para solicitarlo por correo.</p>
         </div>
-        <a id="download-main" class="button primary" href="https://github.com/TOTO-Toolkit/TOTO-public/releases/download/v0.2.0-public-beta.7/TOTO-Setup.exe" data-i18n="download_windows">Descargar instalador Windows</a>
+        <a id="request-installer-main" class="button primary" href="mailto:fabian.nana@pucp.edu.pe?subject=Solicitud%20del%20instalador%20privado%20de%20TOTO" data-i18n="request_installer">Solicitar instalador privado por correo</a>
       </section>
 
       <footer>
@@ -140,6 +140,6 @@
       </footer>
     </main>
     <noscript>Esta demo necesita JavaScript para cargar el modelo y procesar el vídeo local.</noscript>
-    <script defer src="demo.js?v=0.3.4-private-csv"></script>
+    <script defer src="demo.js?v=0.3.5-private-installer-mailto"></script>
   </body>
 </html>
