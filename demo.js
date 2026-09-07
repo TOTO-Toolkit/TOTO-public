@@ -24,12 +24,12 @@ const PALETTE = ["#24d4ca", "#ffb454", "#a88bff", "#ff7292", "#76b9ff", "#9ee36d
 
 const copy = {
   es: {
-    nav_demo: "Demo real", nav_download: "Descargar", nav_releases: "Versiones", nav_code: "Distribución",
+    nav_demo: "Demo real", nav_download: "Solicitar instalador privado", nav_releases: "Versiones", nav_code: "Distribución",
     live_model: "Modelo real", hero_title: "Prueba el tracking real antes de instalar.",
     hero_copy: "Selecciona un vídeo desde tu celular o computadora. MoveNet analiza las personas en tu navegador, dibuja sus puntos y te deja descargar los resultados. El vídeo no se sube a un servidor de TOTO.",
     try_demo: "Probar con mi vídeo", request_installer: "Solicitar instalador privado por correo", cloud_title: "Demo pública; instalador privado",
     cloud_copy: "La demo y el modelo se sirven públicamente. El instalador de escritorio no se publica: solicítalo por correo.",
-    source_link: "Ver distribución", model_link: "Ver modelo", interactive_label: "PRUEBA INTERACTIVA",
+    source_link: "Ver distribución", model_link: "Ver modelo", public_only_note: "Solo demo pública · código e instalador privados", interactive_label: "PRUEBA INTERACTIVA",
     demo_title: "Sube un vídeo y ejecuta pose tracking", demo_copy: "Esta vez no hay una figura dibujada de mentira: el detector recibe los frames de tu vídeo y devuelve poses reales.",
     model_not_loaded: "Modelo no cargado", choose_video: "Elegir vídeo", load_model: "Cargar modelo", process_video: "Procesar vídeo",
     stop: "Detener", empty_title: "Selecciona un vídeo para comenzar", empty_copy: "Formatos habituales del navegador: MP4, WebM o MOV.",
@@ -47,12 +47,12 @@ const copy = {
     finished: "Procesamiento terminado", no_video: "Selecciona primero un vídeo", error: "No se pudo completar la operación",
   },
   en: {
-    nav_demo: "Live demo", nav_download: "Download", nav_releases: "Releases", nav_code: "Distribution",
+    nav_demo: "Live demo", nav_download: "Request private installer", nav_releases: "Releases", nav_code: "Distribution",
     live_model: "Real model", hero_title: "Try real tracking before installing.",
     hero_copy: "Choose a video from your phone or computer. MoveNet detects people in your browser, draws their keypoints and lets you download the results. The video is not uploaded to a TOTO server.",
     try_demo: "Try with my video", request_installer: "Request private installer by email", cloud_title: "Public demo; private installer",
     cloud_copy: "The demo and model are served publicly. The desktop installer is not published: request it by email.",
-    source_link: "View distribution", model_link: "View model", interactive_label: "INTERACTIVE TEST",
+    source_link: "View distribution", model_link: "View model", public_only_note: "Public demo only · private code and installer", interactive_label: "INTERACTIVE TEST",
     demo_title: "Upload a video and run pose tracking", demo_copy: "This is not a drawn figure: the detector receives frames from your video and returns real poses.",
     model_not_loaded: "Model not loaded", choose_video: "Choose video", load_model: "Load model", process_video: "Process video",
     stop: "Stop", empty_title: "Choose a video to begin", empty_copy: "Common browser formats: MP4, WebM or MOV.",

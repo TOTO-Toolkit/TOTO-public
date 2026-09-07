@@ -18,8 +18,6 @@
       <nav class="nav" aria-label="Primary navigation">
         <a href="#demo" data-i18n="nav_demo">Demo real</a>
         <a href="#download" data-i18n="nav_download">Descargar</a>
-        <a href="https://github.com/TOTO-Toolkit/TOTO-public/releases" data-i18n="nav_releases">Versiones</a>
-        <a href="https://github.com/TOTO-Toolkit/TOTO-public" data-i18n="nav_code">Distribución</a>
         <select id="language" aria-label="Language">
           <option value="es">🇵🇪 Español</option>
           <option value="en">🇬🇧 English</option>
@@ -47,7 +45,6 @@
           <strong data-i18n="cloud_title">Demo pública; instalador privado</strong>
           <span data-i18n="cloud_copy">La demo y el modelo se sirven públicamente. El instalador de escritorio no se publica: solicítalo por correo.</span>
           <div class="trust-links">
-            <a href="https://github.com/TOTO-Toolkit/TOTO-public" data-i18n="source_link">Ver distribución</a>
             <a href="https://tfhub.dev/google/tfjs-model/movenet/multipose/lightning/1" data-i18n="model_link">Ver modelo</a>
           </div>
         </aside>
@@ -136,10 +133,10 @@
 
       <footer>
         <span>TOTO · Toolkit for Open Tracking and Observation</span>
-        <span><a href="https://github.com/TOTO-Toolkit/TOTO-public">TOTO-public</a></span>
+        <span data-i18n="public_only_note">Solo demo pública · código e instalador privados</span>
       </footer>
     </main>
     <noscript>Esta demo necesita JavaScript para cargar el modelo y procesar el vídeo local.</noscript>
-    <script defer src="demo.js?v=0.3.5-private-installer-mailto"></script>
+    <script defer src="demo.js?v=0.3.6-public-demo-private-code"></script>
   </body>
 </html>
