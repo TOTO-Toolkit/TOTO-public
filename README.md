@@ -2,9 +2,9 @@
 
 # TOTO public distribution
 
-This repository contains only public distribution metadata and release assets
-for TOTO. The scientific source remains in the private development
-repositories. Download the Windows bootstrap installer from the latest
+This repository contains public distribution metadata, release assets and the
+static browser demo for TOTO. The scientific source remains in the private
+development repositories. Download the Windows bootstrap installer from the latest
 pre-release; it downloads pinned components, verifies SHA-256, and installs
 TOTO without requiring Python.
 
@@ -16,7 +16,7 @@ the full model catalog and user-provided model workflow remain supported.
 - License: MIT for TOTO source; bundled third-party runtimes retain their own
   licenses and notices.
 - Public demo: see the TOTO demo site linked from the release page.
-- Web demo: https://toto-toolkit.github.io/TOTO-demo/
+- Web demo: https://toto-toolkit.github.io/TOTO-public/
 - Release: https://github.com/TOTO-Toolkit/TOTO-public/releases/tag/v0.2.0-public-beta.6
 
 Developed at TeHealP, Pontificia Universidad Católica del Perú.

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#08182f">
+    <meta name="description" content="TOTO: prueba real de pose tracking en el navegador con un vídeo local.">
+    <title>TOTO · Tracking real en el navegador</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="TOTO home">
+        <img src="assets/toto-logo-long.png" alt="TOTO — Toolkit for Open Tracking and Observation">
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#demo" data-i18n="nav_demo">Demo real</a>
+        <a href="#download" data-i18n="nav_download">Descargar</a>
+        <a href="https://github.com/TOTO-Toolkit/TOTO-public/releases" data-i18n="nav_releases">Versiones</a>
+        <a href="https://github.com/TOTO-Toolkit/TOTO-public" data-i18n="nav_code">Distribución</a>
+        <select id="language" aria-label="Language">
+          <option value="es">🇵🇪 Español</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+        <button id="theme" class="icon-button" type="button" aria-label="Toggle theme">◐</button>
+      </nav>
+    </header>
+
+    <main id="top" class="shell">
+      <section class="hero">
+        <div>
+          <div class="eyebrow-row">
+            <p class="eyebrow">TOTO / BROWSER LAB</p>
+            <span class="live-pill"><span class="status-dot"></span><span data-i18n="live_model">Modelo real</span></span>
+          </div>
+          <h1 data-i18n="hero_title">Prueba el tracking real antes de instalar.</h1>
+          <p class="hero-copy" data-i18n="hero_copy">Selecciona un vídeo desde tu celular o computadora. MoveNet analiza las personas en tu navegador, dibuja sus puntos y te deja descargar los resultados. El vídeo no se sube a un servidor de TOTO.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#demo" data-i18n="try_demo">Probar con mi vídeo</a>
+            <a class="button secondary" id="download-hero" href="https://github.com/TOTO-Toolkit/TOTO-public/releases/download/v0.2.0-public-beta.7/TOTO-Setup.exe" data-i18n="download_windows">Descargar instalador Windows</a>
+          </div>
+        </div>
+        <aside class="trust-card">
+          <div class="trust-icon">◎</div>
+          <strong data-i18n="cloud_title">Código y distribución en GitHub</strong>
+          <span data-i18n="cloud_copy">La demo, el instalador y la trazabilidad del proyecto viven en GitHub. El modelo se carga desde la nube al pulsar “Cargar modelo”.</span>
+          <div class="trust-links">
+            <a href="https://github.com/TOTO-Toolkit/TOTO-public" data-i18n="source_link">Ver distribución</a>
+            <a href="https://tfhub.dev/google/tfjs-model/movenet/multipose/lightning/1" data-i18n="model_link">Ver modelo</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="demo" class="demo-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="interactive_label">PRUEBA INTERACTIVA</p>
+            <h2 data-i18n="demo_title">Sube un vídeo y ejecuta pose tracking</h2>
+            <p class="section-copy" data-i18n="demo_copy">Esta vez no hay una figura dibujada de mentira: el detector recibe los frames de tu vídeo y devuelve poses reales.</p>
+          </div>
+          <span id="model-badge" class="demo-badge pending" data-i18n="model_not_loaded">Modelo no cargado</span>
+        </div>
+
+        <div class="demo-grid">
+          <div class="viewer-card">
+            <div class="viewer-toolbar">
+              <label class="button secondary upload-button">
+                <input id="video-input" type="file" accept="video/*">
+                <span data-i18n="choose_video">Elegir vídeo</span>
+              </label>
+              <button id="load-model" class="button primary small" type="button" data-i18n="load_model">Cargar modelo</button>
+              <button id="process" class="button secondary small" type="button" disabled data-i18n="process_video">Procesar vídeo</button>
+              <button id="stop" class="button quiet small" type="button" disabled data-i18n="stop">Detener</button>
+            </div>
+            <div class="stage" id="stage">
+              <video id="source-video" controls playsinline muted></video>
+              <canvas id="overlay-canvas" aria-label="Pose tracking overlay"></canvas>
+              <div id="empty-state" class="empty-state">
+                <div class="empty-icon">▶</div>
+                <strong data-i18n="empty_title">Selecciona un vídeo para comenzar</strong>
+                <span data-i18n="empty_copy">Formatos habituales del navegador: MP4, WebM o MOV.</span>
+              </div>
+            </div>
+            <div class="viewer-status">
+              <span id="viewer-message" data-i18n="ready">Listo para cargar un vídeo</span>
+              <span id="pose-count">0 poses</span>
+            </div>
+            <div class="progress-track"><span id="progress-bar"></span></div>
+          </div>
+
+          <aside class="controls-card">
+            <div class="control-group model-panel">
+              <div class="row-between"><label data-i18n="runtime">Runtime</label><span id="backend-value">—</span></div>
+              <strong id="model-name">MoveNet MultiPose Lightning</strong>
+              <span id="model-status" class="muted" data-i18n="model_hint">Carga el modelo para activar la inferencia.</span>
+            </div>
+            <div class="control-group">
+              <label data-i18n="visuals">Capas visuales</label>
+              <label class="check"><input id="show-skeleton" type="checkbox" checked><span data-i18n="skeleton">Esqueleto</span></label>
+              <label class="check"><input id="show-boxes" type="checkbox" checked><span data-i18n="boxes">Cajas</span></label>
+              <label class="check"><input id="show-keypoints" type="checkbox" checked><span data-i18n="keypoints">Puntos</span></label>
+            </div>
+            <div class="control-group">
+              <div class="row-between"><label for="confidence" data-i18n="confidence">Confianza mínima</label><output id="confidence-value">30%</output></div>
+              <input id="confidence" type="range" min="10" max="90" value="30">
+            </div>
+            <div class="metrics-grid">
+              <div><span data-i18n="metric_frames">Frames</span><strong id="metric-frames">0</strong></div>
+              <div><span data-i18n="metric_people">Personas</span><strong id="metric-people">0</strong></div>
+              <div><span data-i18n="metric_fps">FPS modelo</span><strong id="metric-fps">—</strong></div>
+              <div><span data-i18n="metric_backend">Backend</span><strong id="metric-backend">—</strong></div>
+            </div>
+            <div class="analysis" id="analysis" data-i18n="analysis_hint">Carga el modelo y procesa un vídeo para obtener resultados reales.</div>
+            <button id="download-results" class="button secondary full hidden" type="button" data-i18n="download_results">Guardar CSV (opcional)</button>
+            <p class="privacy-note" data-i18n="privacy_note">Privacidad: el vídeo y las poses quedan solo en la memoria temporal de esta pestaña. No se suben ni se guardan en GitHub. Solo se descarga un CSV si tú lo eliges.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="proof-grid">
+        <article><span class="proof-number">01</span><h3 data-i18n="proof_one_title">Modelo cargado</h3><p data-i18n="proof_one_copy">MoveNet MultiPose Lightning se inicializa de verdad con TensorFlow.js y devuelve hasta seis personas.</p></article>
+        <article><span class="proof-number">02</span><h3 data-i18n="proof_two_title">Vídeo del usuario</h3><p data-i18n="proof_two_copy">Puedes usar un archivo del teléfono o de la computadora; el procesamiento ocurre en la pestaña.</p></article>
+        <article><span class="proof-number">03</span><h3 data-i18n="proof_three_title">Salida bajo tu control</h3><p data-i18n="proof_three_copy">Los resultados quedan en la caché temporal y solo se descargan si eliges Guardar CSV.</p></article>
+      </section>
+
+      <section id="download" class="download-section">
+        <div>
+          <p class="eyebrow" data-i18n="distribution">DISTRIBUCIÓN PÚBLICA</p>
+          <h2 data-i18n="download_title">Instala el flujo completo de escritorio</h2>
+          <p data-i18n="download_copy">El instalador web es un bootstrap separado del programa. Descarga los componentes desde la distribución de GitHub, verifica SHA-256, conserva las descargas reanudables y crea el acceso directo de TOTO.</p>
+        </div>
+        <a id="download-main" class="button primary" href="https://github.com/TOTO-Toolkit/TOTO-public/releases/download/v0.2.0-public-beta.7/TOTO-Setup.exe" data-i18n="download_windows">Descargar instalador Windows</a>
+      </section>
+
+      <footer>
+        <span>TOTO · Toolkit for Open Tracking and Observation</span>
+        <span><a href="https://github.com/TOTO-Toolkit/TOTO-public">TOTO-public</a></span>
+      </footer>
+    </main>
+    <noscript>Esta demo necesita JavaScript para cargar el modelo y procesar el vídeo local.</noscript>
+    <script defer src="demo.js?v=0.3.4-private-csv"></script>
+  </body>
+</html>
